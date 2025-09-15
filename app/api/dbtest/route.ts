@@ -24,10 +24,10 @@ export async function GET() {
     client.release();
 
     return NextResponse.json({ data: result.rows });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
     return NextResponse.json(
-      { error: "Error en la base de datos", detail: error.message },
+      { error: "Error en la base de datos", detail: (error as Error).message },
       { status: 500 }
     );
   }
